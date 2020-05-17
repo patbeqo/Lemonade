@@ -33,7 +33,7 @@ class SalesPage extends Component {
  render(){
 
     return (
-      <body>
+      <body class="test">
         < SalesFrom onSave={this.addSalesForm}/>
       </body>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SalesPage from './SalesPage.js';
 import ProfitsTable from './ProfitsTable.js';
+import './ReportPage.scss';
 
 class ReportPage extends Component {
 
@@ -30,13 +31,13 @@ class ReportPage extends Component {
 
     return (
       <body class="Site">
-        <h3>Sales Report</h3>
+        <h3 class="Report-Title">Sales Report</h3>
         <main class="Site-content">
           <form>
             <div class="form-group row">
               <div class="col">
                 <label for="item_selct">Sales Person</label>
-                <select class="form-control" id="item_select" onChange = {this.updateSalesPerson.bind(this)}>
+                <select class="form-control" id={this.state.salesPerson === "None" ? "errorClass":"item_select"} onChange = {this.updateSalesPerson.bind(this)}>
                   <option>None</option>
                   <option>Jeff Terry</option>
                   <option>Thomas Black</option>

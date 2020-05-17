@@ -1,18 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Homepage.scss';
 
 function EnterSale() {
   return (
-    <body class="Site">
-    <h1> Welcome Back! </h1>
-    <main class="Site-content">
-      <Link to = "/sales/form/">
+    <body>
+      <div class="Welcome">
+        <h1> Welcome back! </h1>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class = "buttons">
+        <Link to = "/sales/form/">
         <button type="button" class="btn btn-outline-success">Enter Sale</button>
-      </Link>
-      <Link to = '/sales/report/'>
-      <button type="button" class="btn btn-outline-primary">Sales Report</button>
-      </Link>
-    </main>
+        </Link>
+        </div>
+        <div class = "buttons">
+        <Link to = '/sales/report/'>
+        <button type="button" class="btn btn-outline-primary">Sales Report</button>
+        </Link>
+        </div>
+      </div>
   </body>
   );
 }
