@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import EnterSale from './EnterSale.js';
-import SalesReport from './SalesReport.js';
+import SalesPage from './SalesPage.js';
+import ReportPage from './ReportPage.js';
 import Homepage from './Homepage.js';
 import  { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -11,8 +11,8 @@ function App() {
       <div className="App">
         <Switch>
           <Route path = "/" exact component = {Homepage} />
-          <Route path = "/sales/form/"  exact component = {EnterSale} />
-          <Route path = "/sales/report/" exact component = {SalesReport} />
+          <Route path = "/sales/form/"  exact component = {SalesPage} />
+          <Route path = "/sales/report/" exact component = {ReportPage} />
         </Switch>
       </div>
     </Router>
