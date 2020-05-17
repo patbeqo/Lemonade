@@ -34,7 +34,6 @@ class SalesPage extends Component {
 
     return (
       <body>
-        <h1> Sales page </h1>
         < SalesFrom onSave={this.addSalesForm}/>
       </body>
     );

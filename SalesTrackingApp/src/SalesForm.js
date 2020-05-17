@@ -123,7 +123,7 @@ class SalesForm extends Component {
             </div>
           </div>
             <div class="col">
-              <button type="button" class="btn btn-outline-primary" onClick = {this.saveDataFunction.bind(this)}>Save</button>
+              <button type="button" class="btn btn-outline-info" onClick = {this.saveDataFunction.bind(this)}>Save</button>
             </div>
         </div>
       </footer>

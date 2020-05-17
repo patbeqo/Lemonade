@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import SalesPage from './SalesPage.js';
 import ReportPage from './ReportPage.js';
 import Homepage from './Homepage.js';
