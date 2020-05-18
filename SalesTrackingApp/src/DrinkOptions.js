@@ -20,13 +20,16 @@ class DrinkOptions extends Component {
             this.setState({profit: this.state.numSales * 1.5});
             this.props.onUpdate(this.props.id, 1, this.state.numSales * 1.5, "Fresh Lemon Lemonade");
             
+            
         }else if (e.target.value === "Orange & Lemon Splash"){
             this.setState({profit: this.state.numSales * 2});
             this.props.onUpdate(this.props.id, 1, this.state.numSales * 2, "Orange & Lemon Splash");
             
+            
         }else if (e.target.value === "Sugary Shocker"){
             this.setState({profit: this.state.numSales * 3});
             this.props.onUpdate(this.props.id, 1, this.state.numSales * 3, "Sugary Shocker");
+            
             
         }else if (e.target.value === "Wild Whiskey Whack"){
             this.setState({profit: this.state.numSales * 5.5});
@@ -57,7 +60,7 @@ class DrinkOptions extends Component {
             }
         }else if (this.state.item === "Wild Whiskey Whack"){
             this.setState({profit: e.target.value * 5.5});
-            if(isNaN(e.target.value * 1.5) == false){
+            if(isNaN(e.target.value * 5.5) == false){
                 this.props.onUpdate(this.props.id, 1, e.target.value * 5.5, "Wild Whiskey Whack");
             }
         }
@@ -65,8 +68,6 @@ class DrinkOptions extends Component {
     };
 
     render(){
-
-        console.log('prop', this.props)
 
         return (
             <form class="entries">
@@ -82,11 +83,11 @@ class DrinkOptions extends Component {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> Number of units sold</label>
-                        <input type="email" class="form-control" id={isNaN(this.state.profit) ? "errorClass" : "blankClass"} aria-describedby="emailHelp" onChange = {this.updateNumSales.bind(this)} ></input>
+                        <label> Number of units sold</label>
+                        <input  class="form-control" id={isNaN(this.state.profit) ? "errorClass" : ""}  onChange = {this.updateNumSales.bind(this)} ></input>
                     </div>                
                     <div class = "form-group">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Profit</label>
+                        <label class="col-sm-2 col-form-label">Profit</label>
                         <div class="col-sm-10">
                             <text type="text" readonly class="form-control-plaintext" id="staticEmail" >${this.state.profit}</text>
                         </div>

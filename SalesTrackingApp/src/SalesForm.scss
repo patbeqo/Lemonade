@@ -25,7 +25,31 @@
 }
 
 #errorClass {
-	-webkit-box-shadow: inset 0px 0px 29px 11px rgba(250,13,25,0.48);
+	-webkit-box-shadow: inset 0px 0px 29px 11px rgba(219, 72, 79, 0.48);
 	-moz-box-shadow: inset 0px 0px 29px 11px rgba(250,13,25,0.48);
 	box-shadow: inset 0px 0px 29px 11px rgba(250,13,25,0.48);
+}
+
+
+
+.popup {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
+    width: 200px;
+    height: 70px;
+    text-align: center;
+    position: fixed;   
+    top: 3em;  
+    left: 3em;  
+    right: 3em;  
+    bottom: 3em;  
+    margin: auto;  
+    background-color: rgba(7, 150, 83, 0.932);  
+    color: white;
+}  
+  
+.hide {
+
+    display: none;
 }
