@@ -20,16 +20,13 @@ class DrinkOptions extends Component {
             this.setState({profit: this.state.numSales * 1.5});
             this.props.onUpdate(this.props.id, 1, this.state.numSales * 1.5, "Fresh Lemon Lemonade");
             
-            
         }else if (e.target.value === "Orange & Lemon Splash"){
             this.setState({profit: this.state.numSales * 2});
             this.props.onUpdate(this.props.id, 1, this.state.numSales * 2, "Orange & Lemon Splash");
             
-            
         }else if (e.target.value === "Sugary Shocker"){
             this.setState({profit: this.state.numSales * 3});
             this.props.onUpdate(this.props.id, 1, this.state.numSales * 3, "Sugary Shocker");
-            
             
         }else if (e.target.value === "Wild Whiskey Whack"){
             this.setState({profit: this.state.numSales * 5.5});
@@ -42,26 +39,59 @@ class DrinkOptions extends Component {
 
         this.setState({numSales: e.target.value});
         if (this.state.item === "Fresh Lemon Lemonade"){
+
             this.setState({profit: e.target.value * 1.5});
 
             if(isNaN(e.target.value * 1.5) == false){
+
                 this.props.onUpdate(this.props.id, 1, e.target.value * 1.5, "Fresh Lemon Lemonade");
+                this.props.onInvalid(0);
+
+            }else{
+
+                this.props.onInvalid(1);
             }
+
         }else if (this.state.item === "Orange & Lemon Splash"){
+
             this.setState({profit: e.target.value * 2});
 
             if(isNaN(e.target.value * 2) == false){
+
                 this.props.onUpdate(this.props.id, 1, e.target.value * 2, "Orange & Lemon Splash");
+                this.props.onInvalid(0);
+
+            }else{
+
+                this.props.onInvalid(1);
             }
+
         }else if (this.state.item === "Sugary Shocker"){
+
             this.setState({profit: e.target.value * 3});
+
             if(isNaN(e.target.value * 3) == false){
+
                 this.props.onUpdate(this.props.id, 1, e.target.value * 3, "Sugary Shocker");
+                this.props.onInvalid(0);
+
+            }else{
+
+                this.props.onInvalid(1);
             }
+
         }else if (this.state.item === "Wild Whiskey Whack"){
+
             this.setState({profit: e.target.value * 5.5});
+            
             if(isNaN(e.target.value * 5.5) == false){
+
                 this.props.onUpdate(this.props.id, 1, e.target.value * 5.5, "Wild Whiskey Whack");
+                this.props.onInvalid(0);
+
+            }else{
+
+                this.props.onInvalid(1);
             }
         }
         

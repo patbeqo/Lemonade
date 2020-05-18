@@ -15,16 +15,17 @@ class SalesForm extends Component {
     profitsBool: 0,
     dateBool: 0,
     popBool: 0,
+    invalidBool: 0,
+    saveBool: 0,
     salesReportData: []
   };
 
-  
   
   // Function adds a sale row
   addSale(){
 
     const index = this.state.sales.length
-    this.setState({sales: [...this.state.sales, <DrinkOptions onDelete={this.handleDelete} onUpdate={this.updateTotalProfits} id = {index} />]});
+    this.setState({sales: [...this.state.sales, <DrinkOptions onDelete={this.handleDelete} onUpdate={this.updateTotalProfits} onInvalid={this.handInvalidString} id = {index} />]});
     
   };
 
@@ -44,7 +45,7 @@ class SalesForm extends Component {
 
     this.setState({salesPerson: e.target.value});
 
-    if(e.target.value == "None"){
+    if(e.target.value === "None"){
 
       this.setState({personBool: 1});
 
@@ -58,16 +59,8 @@ class SalesForm extends Component {
   updateDateTime(e) {
 
     this.setState({dateTime: e.target.value});
+    this.setState({dateBool: 0});
 
-    if(e.target.value == ""){
-
-      this.setState({dateBool: 1})
-
-    }else{
-
-      this.setState({dateBool: 0})
-
-    }
   };
 
 
@@ -83,14 +76,14 @@ class SalesForm extends Component {
       //Total Profits were edited
       this.setState({profitsBool: 0});
 
-      if(profit != 0){
+      if(profit !== 0){
 
         //updates the list of items sold if produced profits
         var i;
         var j = 0; // Checks if item is already there
         for (i =0; i<this.state.itemsArray.length; i++){
 
-          if (this.state.itemsArray[i] == item){
+          if (this.state.itemsArray[i] = item){
             
             j = 1;
 
@@ -98,7 +91,7 @@ class SalesForm extends Component {
 
         }
       
-        if (j == 0){
+        if (j === 0){
           
           const copyItemsArray = this.state.itemsArray;
           copyItemsArray.push(item);
@@ -109,14 +102,14 @@ class SalesForm extends Component {
       }
 
       //When the total is at 0
-      if(this.state.totalProfits == 0){
+      if(this.state.totalProfits === 0){
 
         this.setState({totalProfits: profit});
         this.state.tmp_store=[id,profit]
 
       }
 
-      if(this.tmp_store[0] == id){
+      if(this.tmp_store[0] === id){
 
         //Remove the previous profit and add the new one
         var tmp_var = this.state.totalProfits;
@@ -126,7 +119,7 @@ class SalesForm extends Component {
 
       }
 
-      if(this.tmp_store[0] != id){
+      if(this.tmp_store[0] !== id){
 
 
         var tmp_var = this.state.totalProfits;
@@ -141,7 +134,7 @@ class SalesForm extends Component {
       var i;
       for (i =0; i<this.state.itemsArray.length; i++){
 
-        if (this.state.itemsArray[i] == item){
+        if (this.state.itemsArray[i] === item){
 
           const copyItemsArray = this.state.itemsArray;
           copyItemsArray.splice(i,1);
@@ -166,21 +159,21 @@ class SalesForm extends Component {
 
     //Error check
 
-    if(this.state.totalProfits == 0 || this.state.salesPerson == "None" || this.state.dateTime == "" || this.state.saveCheck == 1){
+    if(this.state.totalProfits === 0 || this.state.salesPerson === "None" || this.state.dateTime === "" || this.state.saveCheck === 1 || this.state.invalidBool === 1){
 
-      if(this.state.totalProfits == 0 ){
+      if(this.state.totalProfits === 0 ){
 
         this.setState({profitsBool: 1});
 
       }
 
-      if(this.state.salesPerson == "None"){
+      if(this.state.salesPerson === "None"){
 
         this.setState({personBool: 1});
 
       }
 
-      if(this.state.dateTime == ""){
+      if(this.state.dateTime === ""){
 
         this.setState({dateBool: 1});
 
@@ -199,25 +192,27 @@ class SalesForm extends Component {
       copySalesReportData.push(tmp_var);
       copySalesReportData.push(tmp_var2);
 
-      if(this.state.salesPerson == "Jeff Terry"){
+      if(this.state.salesPerson === "Jeff Terry"){
 
         copySalesReportData.push(tmp_var2 * 0.1);
 
-      }else if(this.state.salesPerson == "Thomas Black"){
+      }else if(this.state.salesPerson === "Thomas Black"){
 
         copySalesReportData.push(tmp_var2 * 0.2);
 
-      }else if(this.state.salesPerson == "John Rice"){
+      }else if(this.state.salesPerson === "John Rice"){
 
         copySalesReportData.push(tmp_var2 * 0.05);
 
-      }else if(this.state.salesPerson == "Larry Long"){
+      }else if(this.state.salesPerson === "Larry Long"){
 
         copySalesReportData.push(0);
 
       }
       
       this.setState({salesReportData: copySalesReportData});
+
+      this.setState({saveBool: 1})
 
       // Resets page to defualt values
 
@@ -260,8 +255,24 @@ class SalesForm extends Component {
     const copyTmp = this.state.salesReportData;
     copyTmp.splice(0, copyTmp.length);
     this.setState({salesReportData: copyTmp});
+    this.setState({saveBool: 1})
 
   }
+
+
+  handInvalidString = (checker) =>{
+
+    if (checker === 1 ){
+
+      this.setState({invalidBool: 1});
+    
+    }else{
+
+      this.setState({invalidBool: 0});
+
+    }
+
+  };
 
 
   render() {
@@ -279,7 +290,7 @@ class SalesForm extends Component {
                 <form>
                   <div class="form-group row">
                     <div class="col">
-                      <label for="item_selct">Sales Person</label>
+                      <label>Sales Person</label>
                       <select class="form-control" id={this.state.personBool ? "errorClass":"item_select"} onChange = {this.updateSalesPerson.bind(this)} value = {this.state.salesPerson} >
                           <option>None</option>
                           <option>Jeff Terry</option>
@@ -289,9 +300,11 @@ class SalesForm extends Component {
                         </select>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Date and Time</label>
-                    <input class="form-control" id={this.state.dateBool ? "errorClass":"item_select"} placeholder="'May 12, 2020 12:45pm'" onChange = {this.updateDateTime.bind(this)} value = {this.state.dateTime}></input>          
+                  <div class="form-group row">
+                    <div class="col">
+                      <label>Date and time</label>
+                      <input class="form-control" type="datetime-local" onChange={this.updateDateTime.bind(this)} id={this.state.dateBool ? "errorClass":""} value= {this.state.dateTime}></input>
+                    </div>
                   </div>
                 </form>
                 {
@@ -313,10 +326,13 @@ class SalesForm extends Component {
                     </p>
                   </div>
                   <div class="col-sm">
-                    <button type="button" class="btn btn-outline-info" onClick = {()=>{
+                    <button type="button" class="btn btn-info" onClick = {()=>{
                       this.saveDataFunction();
-                      data.addNewForm(this.state.salesReportData);
-                      this.resetReportData();
+                      //if(this.state.saveBool === 1){
+                        const copyOFDATA = this.state.salesReportData;
+                        data.addNewForm(copyOFDATA);
+                        this.resetReportData();
+                     // }
                       }}>Save</button>
                   </div>
                 </div>
