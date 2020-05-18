@@ -16,7 +16,6 @@ class SalesForm extends Component {
     dateBool: 0,
     popBool: 0,
     invalidBool: 0,
-    saveBool: 0,
     salesReportData: []
   };
 
@@ -212,8 +211,6 @@ class SalesForm extends Component {
       
       this.setState({salesReportData: copySalesReportData});
 
-      this.setState({saveBool: 1})
-
       // Resets page to defualt values
 
       this.tmp_store=[0,0];
@@ -255,7 +252,6 @@ class SalesForm extends Component {
     const copyTmp = this.state.salesReportData;
     copyTmp.splice(0, copyTmp.length);
     this.setState({salesReportData: copyTmp});
-    this.setState({saveBool: 1})
 
   }
 
@@ -277,12 +273,13 @@ class SalesForm extends Component {
 
   render() {
 
+
     return (
         <div>
         <appContext.Consumer>
           {(data) => (
             <body class="Site">
-              <h3 class = "title ">Sales Form</h3>
+              <h3 class = "title ">Sales Entry Form</h3>
               <div class={this.state.popBool ? 'popup' : "hide"}>  
                 <p>Successfully Saved !</p>  
               </div>
@@ -328,11 +325,19 @@ class SalesForm extends Component {
                   <div class="col-sm">
                     <button type="button" class="btn btn-info" onClick = {()=>{
                       this.saveDataFunction();
-                      //if(this.state.saveBool === 1){
-                        const copyOFDATA = this.state.salesReportData;
-                        data.addNewForm(copyOFDATA);
+                      if(this.state.totalProfits !== 0 && this.state.salesPerson !== "None" && this.state.dateTime !== "" && this.state.saveCheck !== 1 && this.state.invalidBool !== 1){
+                        const originalData = this.state.salesReportData;
+                        let copyOfData = [];
+                        let i = 0;
+                        let key;
+                        for(key in originalData){
+                          copyOfData[i] = originalData[i]
+                          i++;
+                        }
+
+                        data.addNewForm(copyOfData);
                         this.resetReportData();
-                     // }
+                      }
                       }}>Save</button>
                   </div>
                 </div>

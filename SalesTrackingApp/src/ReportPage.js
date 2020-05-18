@@ -108,14 +108,12 @@ class ReportPage extends Component {
 
   render(){
 
-    console.log(this.state.showBool);
-
     return (
       <div>
         <appContext.Consumer>
           {(data) => (
             <body class="Site">
-              <h3 class="Report-Title">Sales Report</h3>
+              <h3 class="Report-Title">Sales & Commission Report</h3>
               <main class="Site-content">
                 <form>
                   <div class="form-group row">

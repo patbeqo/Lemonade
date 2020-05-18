@@ -10,7 +10,7 @@ class App extends Component {
 
   state = {
 
-    forms:["hello"]
+    forms: []    
     
   }
 
@@ -24,9 +24,8 @@ class App extends Component {
       <appContext.Provider value={{
         state: this.state,
         addNewForm: (newForm) => {
-          const copyForms = this.state.forms;
-          copyForms.push(newForm);
-          this.setState({forms: copyForms})
+          const copyForms = this.state.forms.concat([newForm]);
+          this.setState({forms: copyForms});
         }
       }}>
         <Router>
