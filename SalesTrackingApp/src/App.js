@@ -26,7 +26,12 @@ class App extends Component {
         addNewForm: (newForm) => {
           const copyForms = this.state.forms.concat([newForm]);
           this.setState({forms: copyForms});
-        }
+        },
+        saveData: (person, totalProfits, time, commision, items) =>{
+          const newSalesForm = [person, time, items, totalProfits, commision];
+          const copyForms = this.state.forms.concat(newSalesForm);
+          this.setState({forms: copyForms});
+        },
       }}>
         <Router>
          <div className="content">

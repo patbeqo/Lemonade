@@ -31,7 +31,6 @@
 }
 
 
-
 .popup {
     border-radius: 25px;
     border: 2px solid #73AD21;
@@ -50,6 +49,11 @@
 }  
   
 .hide {
+
+    display: none;
+}
+
+#hide {
 
     display: none;
 }
