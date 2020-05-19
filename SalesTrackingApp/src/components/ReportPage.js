@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ProfitsRow from './ProfitsRow.js';
 import './ReportPage.scss';
 import {appContext} from './Context';
@@ -186,16 +187,19 @@ class ReportPage extends Component {
     
     return (
       <div>
+        <Link to = "/">
+          <button type="button" class="btn btn-danger">Back</button>
+        </Link>
         <appContext.Consumer>
           {(data) => (
-            <body class="Site">
-              <h3 class="Report-Title">Sales & Commission Report</h3>
-              <main class="Site-content">
+            <div className="Site">
+              <h3 className="Report-Title">Sales & Commission Report</h3>
+              <main className="Site-content">
                 <form>
-                  <div class="form-group row">
-                    <div class="col">
+                  <div className="form-group row">
+                    <div className="col">
                       <label for="item_selct">Sales Person</label>
-                      <select class="form-control" id={this.state.personBool ? "errorClass":"item_select"} onChange = {this.updateSalesPerson.bind(this)}>
+                      <select className="form-control" id={this.state.personBool ? "errorclassName":"item_select"} onChange = {this.updateSalesPerson.bind(this)}>
                         <option>None</option>
                         <option>Jeff Terry</option>
                         <option>Thomas Black</option>
@@ -204,54 +208,55 @@ class ReportPage extends Component {
                       </select>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <div class="col">
+                  <div className="form-group row">
+                    <div className="col">
                       <label>Start Date</label>
-                      <input class="form-control" type="datetime-local" onChange={this.updateStartDate.bind(this)} id={this.state.startBool ? "errorClass":""} value= {this.state.startTime}></input>
+                      <input className="form-control" type="datetime-local" onChange={this.updateStartDate.bind(this)} id={this.state.startBool ? "errorclassName":""} value= {this.state.startTime}></input>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <div class="col">
+                  <div className="form-group row">
+                    <div className="col">
                       <label>End Date</label>
-                      <input class="form-control" type="datetime-local" onChange={this.updateEndDate.bind(this)} id={this.state.endBool ? "errorClass":""} value= {this.state.endTime}></input>
+                      <input className="form-control" type="datetime-local" onChange={this.updateEndDate.bind(this)} id={this.state.endBool ? "errorclassName":""} value= {this.state.endTime}></input>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-info" onClick={() => {this.generateReport(data.state.forms)}}>Generate Report</button>
+                  <button type="button" className="btn btn-info" onClick={() => {this.generateReport(data.state.forms)}}>Generate Report</button>
               </form>
-              <div class={ this.state.showBool  ? "" :"hide-report"}>
-                  <div class="container">
-                      <div class="row">
-                          <div class="col">Date</div>
-                          <div class="col">Items Sold</div>
-                          <div class="col">Total Price</div>
-                          <div class="col">Commission Earned</div>
+              <div className={ this.state.showBool  ? "" :"hide-report"}>
+                  <div className="container">
+                      <div className="row">
+                          <div className="col">Date</div>
+                          <div className="col">Items Sold</div>
+                          <div className="col">Total Price</div>
+                          <div className="col">Commission Earned</div>
                       </div>
                   </div>
                   <hr></hr>
                     {
-                    this.state.profits.map((profit)=>{
+                    this.state.profits.map((profit,index)=>{
                       return (
                             <ProfitsRow 
                               date = {profit.date} 
                               items = {profit.items} 
                               money = {profit.money} 
-                              commission = {profit.commission} 
+                              commission = {profit.commission}
+                              key = {index}
                             />
                       )
                     })
                   }
-                  <div class="container">
-                      <div class="row">
-                          <div class="col">Totals</div>
-                          <div class="col"></div>
-                          <div class="col">${this.state.totalsProfit}</div>
-                          <div class="col">${this.state.totalsCommission.toFixed(2)}</div>
+                  <div className="container">
+                      <div className="row">
+                          <div className="col">Totals</div>
+                          <div className="col"></div>
+                          <div className="col">${this.state.totalsProfit}</div>
+                          <div className="col">${this.state.totalsCommission.toFixed(2)}</div>
                       </div>
                   </div>
                   <hr></hr>
               </div>
             </main>
-          </body>
+          </div>
           )}
       </appContext.Consumer>
     </div>

@@ -7,12 +7,12 @@ class DrinkOptions extends Component {
 
         return (
             <form>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">{this.props.drink}</div>
-                        <div class="col">{this.props.amountSold}</div>
-                        <div class="col">${this.props.profits}</div>
-                        <button type="button" class="btn btn-outline-danger" onClick={()=>this.props.onDelete(this.props.id,this.props.profits,this.props.drink)}>Delete Item</button>
+                <div className="container">
+                    <div className="row">
+                        <div className="col">{this.props.drink}</div>
+                        <div className="col">{this.props.amountSold}</div>
+                        <div className="col">${this.props.profits}</div>
+                        <button type="button" className="btn btn-outline-danger" onClick={()=>this.props.onDelete(this.props.id,this.props.profits,this.props.drink)}>Delete Item</button>
                     </div>
                 </div>
             </form>

@@ -1,4 +1,5 @@
 import React, { Component, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import './SalesForm.scss';
 import SalesItem from './SalesItem.js';
 import {appContext} from './Context';
@@ -51,7 +52,7 @@ class SalesForm extends Component {
     }
 
     //If the number of items is a valid poistive integer, and there is an item selected, Add salesForm
-    if(tmp == 0){
+    if(tmp === 0){
 
       const currDrink = this.state.drinkSelected;
       const currAmountSold = this.state.numSold;
@@ -102,7 +103,7 @@ class SalesForm extends Component {
   handleDelete = (index_to_delete, profit_to_remove, item_to_remove) => {
 
     const copySales = this.state.sales;
-    const newSales = copySales.filter((sale,index) => index != index_to_delete);
+    const newSales = copySales.filter((sale,index) => index !== index_to_delete);
     this.setState({sales: newSales});
 
     const copyTotalProfits = this.state.totalProfits;
@@ -114,9 +115,9 @@ class SalesForm extends Component {
 
     for(i=0;i<copyItems.length;i++){
 
-      if(copyItems[i] == item_to_remove){
+      if(copyItems[i] === item_to_remove){
 
-        const newItems = copyItems.filter((item,index) => index!= i);
+        const newItems = copyItems.filter((item,index) => index !== i);
         this.setState({items: newItems});
         
       }
@@ -230,98 +231,101 @@ class SalesForm extends Component {
     
     return (
         <div>
-        <appContext.Consumer>
-          {(data) => (
-            <body class="Site">
-              <h3 class = "title ">Sales Entry Form</h3>
-              <div class={this.state.popBool ? 'popup' : "hide"}>  
-                <p>Successfully Saved !</p>  
-              </div>
-              <main class="Site-content">
-                <form>
-                  <div class="form-group row">
-                    <div class="col">
-                      <label>Sales Person</label>
-                      <select class="form-control" id={this.state.salesPersonBool ? "errorClass":"item_select"} onChange = {this.updateSalesPerson.bind(this)} value = {this.state.salesPerson} >
-                          <option>None</option>
-                          <option>Jeff Terry</option>
-                          <option>Thomas Black</option>
-                          <option>John Rice</option>
-                          <option>Larry Long</option>
-                        </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col">
-                      <label>Date and time</label>
-                      <input class="form-control" type="datetime-local" onChange={this.updateDateTime.bind(this)} id={this.state.dateTimeBool ? "errorClass":""} value= {this.state.dateTime}></input>
-                    </div>
-                  </div>
-                </form>
-                <hr></hr>
-                <div class="form-group row">
-                    <div class="col">
-                      <label>Drink</label>
-                      <select class="form-control" onChange={this.updateDrinkSelected.bind(this)} id={this.state.drinkSelectedBool ? "errorClass" : "item_select"}  value={this.state.drinkSelected} >
-                        <option>None</option>
-                        <option>Fresh Lemon Lemonade</option>
-                        <option>Orange & Lemon Splash</option>
-                        <option>Sugary Shocker</option>
-                        <option>Wild Whiskey Whack</option>
-                      </select>
-                    </div>
-                    <div class="col">
-                      <label>Number of Units Sold</label>
-                      <input class="form-control" onChange={this.updateNumSold.bind(this)} id={this.state.numSoldBool ? "errorClass" : "item_select"} value={this.state.numSold}></input>
-                    </div>
-                    <div class="col">
-                      <button type="button" class="btn btn-outline-success" onClick = {this.addSale.bind(this)}>Enter Item</button>
-                    </div>
+          <Link to = "/">
+            <button type="button" class="btn btn-danger">Back</button>
+          </Link>
+          <appContext.Consumer>
+            {(data) => (
+              <div className="Site">
+                <h3 className = "title ">Sales Entry Form</h3>
+                <div className={this.state.popBool ? 'popup' : "hide"}>  
+                  <p>Successfully Saved !</p>  
                 </div>
-                <div class="container" id={this.state.sales.length ? "" : "hide"}>
-                      <div class="row">
-                          <div class="col">Item</div>
-                          <div class="col">Items Sold</div>
-                          <div class="col">Profits</div>
+                <main className="Site-content">
+                  <form>
+                    <div className="form-group row">
+                      <div className="col">
+                        <label>Sales Person</label>
+                        <select className="form-control" id={this.state.salesPersonBool ? "errorclassName":"item_select"} onChange = {this.updateSalesPerson.bind(this)} value = {this.state.salesPerson} >
+                            <option>None</option>
+                            <option>Jeff Terry</option>
+                            <option>Thomas Black</option>
+                            <option>John Rice</option>
+                            <option>Larry Long</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <div className="col">
+                        <label>Date and time</label>
+                        <input className="form-control" type="datetime-local" onChange={this.updateDateTime.bind(this)} id={this.state.dateTimeBool ? "errorclassName":""} value= {this.state.dateTime}></input>
+                      </div>
+                    </div>
+                  </form>
+                  <hr></hr>
+                  <div className="form-group row">
+                      <div className="col">
+                        <label>Drink</label>
+                        <select className="form-control" onChange={this.updateDrinkSelected.bind(this)} id={this.state.drinkSelectedBool ? "errorclassName" : "item_select"}  value={this.state.drinkSelected} >
+                          <option>None</option>
+                          <option>Fresh Lemon Lemonade</option>
+                          <option>Orange & Lemon Splash</option>
+                          <option>Sugary Shocker</option>
+                          <option>Wild Whiskey Whack</option>
+                        </select>
+                      </div>
+                      <div className="col">
+                        <label>Number of Units Sold</label>
+                        <input className="form-control" onChange={this.updateNumSold.bind(this)} id={this.state.numSoldBool ? "errorclassName" : "item_select"} value={this.state.numSold}></input>
+                      </div>
+                      <div className="col">
+                        <button type="button" className="btn btn-outline-success" onClick = {this.addSale.bind(this)}>Enter Item</button>
                       </div>
                   </div>
-                <hr></hr>
-                {
-                  this.state.sales.map((sale,index)=>{
-                    return (
-                      <SalesItem onDelete={sale.onDelete} id = {index} drink = {sale.drink} amountSold = {sale.amountSold} profits = {sale.profits}/>
-                    )
-                  })
-                }
-              </main>
-            <footer class = "total-save"> 
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm">
-                    <label>Total</label>
-                    <p>
-                    <text type="text"  id = {this.state.totalProfitsBool? "errorClass":"item_select"} >${this.state.totalProfits}</text>
-                    </p>
-                  </div>
-                  <div class="col-sm">
-                    <button type="button" class="btn btn-info" onClick = {()=>{
-                      
-                     //If there are no issues continue with saving the data
-                      if(this.state.totalProfits !== 0 && this.state.salesPerson !== "None" && this.state.dateTime !== ""){
+                  <div className="container" id={this.state.sales.length ? "" : "hide"}>
+                        <div className="row">
+                            <div className="col">Item</div>
+                            <div className="col">Items Sold</div>
+                            <div className="col">Profits</div>
+                        </div>
+                    </div>
+                  <hr></hr>
+                  {
+                    this.state.sales.map((sale,index)=>{
+                      return (
+                        <SalesItem onDelete={sale.onDelete} key = {index} id = {index} drink = {sale.drink} amountSold = {sale.amountSold} profits = {sale.profits}/>
+                      )
+                    })
+                  }
+                </main>
+              <footer className = "total-save"> 
+                <div className="container">
+                  <div className="row">
+                    <div className="col-sm">
+                      <label>Total</label>
+                      <p>
+                      <text type="text"  id = {this.state.totalProfitsBool? "errorclassName":"item_select"} >${this.state.totalProfits}</text>
+                      </p>
+                    </div>
+                    <div className="col-sm">
+                      <button type="button" className="btn btn-info" onClick = {()=>{
+                        
+                      //If there are no issues continue with saving the data
+                        if(this.state.totalProfits !== 0 && this.state.salesPerson !== "None" && this.state.dateTime !== ""){
 
-                        data.saveData(this.state.salesPerson, this.state.totalProfits, this.state.dateTime, this.state.items)
+                          data.saveData(this.state.salesPerson, this.state.totalProfits, this.state.dateTime, this.state.items)
 
-                      }
+                        }
 
-                      this.saveDataFunction();
+                        this.saveDataFunction();
 
-                      }}>Save</button>
+                        }}>Save</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </footer>
-          </body>
-        )}
+              </footer>
+            </div>
+          )}
       </appContext.Consumer>
     </div>
   );

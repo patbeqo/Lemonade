@@ -10,20 +10,19 @@ class App extends Component {
 
   state = {
 
-    forms: []    
+    forms: []    // Stores data to be transferred between router pages
     
   }
 
   
   render(){
 
-    console.log(this.state.forms);
-
     return (
       <appContext.Provider value={{
         state: this.state,
         saveData: (person, totalProfits, time, items) =>{
 
+          //Calculates the commission
           if(person === "Jeff Terry"){
 
             const newCommission = totalProfits * 0.1;

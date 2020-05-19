@@ -6,10 +6,10 @@ class ProfitsRow extends Component {
 
         return (
             <form>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">{this.props.date}</div>
-                        <div class="col">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">{this.props.date}</div>
+                        <div className="col">
                             <ul>
                                 {this.props.items.map((item) =>{
                                     return(
@@ -19,8 +19,8 @@ class ProfitsRow extends Component {
                                 }
                             </ul>
                         </div>
-                        <div class="col">${this.props.money}</div>
-                        <div class="col">${this.props.commission.toFixed(2)}</div>
+                        <div className="col">${this.props.money}</div>
+                        <div className="col">${this.props.commission.toFixed(2)}</div>
                     </div>
                 </div>
             </form>
