@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import SalesForm from './SalesForm.js';
-import ReportPage from './ReportPage.js';
-import Homepage from './Homepage.js';
+import SalesForm from './components/SalesForm.js';
+import ReportPage from './components/ReportPage.js';
+import Homepage from './components/Homepage.js';
 import  { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import {appContext} from './Context'
+import {appContext} from './components/Context.js'
 
 
 class App extends Component {
@@ -14,7 +14,6 @@ class App extends Component {
     
   }
 
- 
   
   render(){
 

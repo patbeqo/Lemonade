@@ -20,7 +20,7 @@ class ProfitsRow extends Component {
                             </ul>
                         </div>
                         <div class="col">${this.props.money}</div>
-                        <div class="col">${this.props.commission}</div>
+                        <div class="col">${this.props.commission.toFixed(2)}</div>
                     </div>
                 </div>
             </form>
