@@ -16,21 +16,11 @@ class ReportPage extends Component {
     endBool: 0,
     startBool: 0,
     showBool: 0,
-    profits:[],
+    profits: [],
     totalsCommission: 0,
     totalsProfit: 0
 
   };
-
-
-  addProfit = (inDate, inItems, inProfit, inCommission) => {
-
-    console.log("hwwasdf")
-
-    this.setState({profits: [...this.state.profits, <ProfitsRow date = {inDate} items = {inItems} profits = {inProfit}  commission = {inCommission} />]});
-  
-  };
-
 
 
   //Function updates the Sales Person
@@ -72,43 +62,21 @@ class ReportPage extends Component {
   };
 
 
-  sortDataFunction = (dataToSort) =>{
-
-    var i;
-    const maxloop = dataToSort[1].length;
-    var newItems = []
-
-    for(i=0; i<maxloop; i++){
-
-      if(!newItems.includes(dataToSort[2][i])){
-
-        newItems.push([dataToSort[2][i]]);
-        newItems.push("  ");
-
-      }
-
-    }
-
-
-    this.addProfit(dataToSort[1],newItems,dataToSort[3],dataToSort[4])
-
-    const copyTotalsProfit = this.state.totalsProfit;
-    const newTotalsProfit = copyTotalsProfit + dataToSort[3];
-    this.setState({totalsProfit: newTotalsProfit});
-
-    const copyTotalsCommission = this.state.totalsCommission;
-    const newTotalsCommission = copyTotalsCommission + dataToSort[4];
-    this.setState({totalsCommission: newTotalsCommission});
-
-  };
-
-
   generateReport = (salesForms) => {
 
     var tmp = 0;
-
-    this.setState({profits: []});
     
+
+    this.setState({
+      profits: [],
+      showBool: 0
+    });
+    
+    let newTotalsProfit= 0
+    let newTotalsCommission = 0
+
+    console.log(this.state.totalsProfit);
+    console.log(this.state.totalsCommission);
 
     if(this.state.salesPerson === "None"){
 
@@ -134,19 +102,42 @@ class ReportPage extends Component {
     if(tmp === 0){
 
       this.setState({showBool: 1});
+      
+      salesForms.forEach((item) =>{
 
-      var i = 0;
-      const maxloop = salesForms.length;
+        if(item[0] === this.state.salesPerson){
+          
+          const newItems = [...new Set(item[2])];
 
-      for ( i = 0; i < maxloop; i++){
 
-        if(salesForms[i][0] === this.state.salesPerson){
+            this.setState(curState => {
+              const setprofits = curState.profits.concat([{ 
+                date: item[1], 
+                items: newItems,
+                money: item[3], 
+                commission: item[4] 
+              }]);
+              return {
+                profits: setprofits
+              }
+            })
+            
 
-          this.sortDataFunction(salesForms[i]);
+          //Update the total Profit
+          newTotalsProfit  += item[3];
+          
+      
+          //Update the total Commission
+          newTotalsCommission += item[4];
+
 
         }
 
-      }
+
+      })
+      
+      this.setState({totalsProfit: newTotalsProfit});
+      this.setState({totalsCommission: newTotalsCommission});
 
     }else{
 
@@ -158,6 +149,8 @@ class ReportPage extends Component {
 
   render(){
 
+    console.log('in render',this.state.profits);
+    
     return (
       <div>
         <appContext.Consumer>
@@ -190,7 +183,7 @@ class ReportPage extends Component {
                       <input class="form-control" type="datetime-local" onChange={this.updateEndDate.bind(this)} id={this.state.endBool ? "errorClass":""} value= {this.state.endTime}></input>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-info" onClick={() => this.generateReport(data.state.forms)}>Generate Report</button>
+                  <button type="button" class="btn btn-info" onClick={() => {this.generateReport(data.state.forms)}}>Generate Report</button>
               </form>
               <div class={ this.state.showBool  ? "" :"hide-report"}>
                   <div class="container">
@@ -203,9 +196,14 @@ class ReportPage extends Component {
                   </div>
                   <hr></hr>
                     {
-                    this.state.profits.map((profit,index)=>{
+                    this.state.profits.map((profit)=>{
                       return (
-                        profit
+                            <ProfitsRow 
+                              date = {profit.date} 
+                              items = {profit.items} 
+                              money = {profit.money} 
+                              commission = {profit.commission} 
+                            />
                       )
                     })
                   }

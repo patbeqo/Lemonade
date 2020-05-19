@@ -23,14 +23,37 @@ class App extends Component {
     return (
       <appContext.Provider value={{
         state: this.state,
-        addNewForm: (newForm) => {
-          const copyForms = this.state.forms.concat([newForm]);
-          this.setState({forms: copyForms});
-        },
-        saveData: (person, totalProfits, time, commision, items) =>{
-          const newSalesForm = [person, time, items, totalProfits, commision];
-          const copyForms = this.state.forms.concat([newSalesForm]);
-          this.setState({forms: copyForms});
+        saveData: (person, totalProfits, time, items) =>{
+
+          if(person === "Jeff Terry"){
+
+            const newCommission = totalProfits * 0.1;
+            const newSalesForm = [person, time, items, totalProfits, newCommission];
+            const copyForms = this.state.forms.concat([newSalesForm]);
+            this.setState({forms: copyForms});
+    
+    
+          }else if (person === "Thomas Black"){
+    
+            const newCommission = totalProfits * 0.2;
+            const newSalesForm = [person, time, items, totalProfits, newCommission];
+            const copyForms = this.state.forms.concat([newSalesForm]);
+            this.setState({forms: copyForms});
+    
+          }else if (person === "John Rice"){
+    
+            const newCommission = totalProfits * 0.05;
+            const newSalesForm = [person, time, items, totalProfits, newCommission];
+            const copyForms = this.state.forms.concat([newSalesForm]);
+            this.setState({forms: copyForms});
+    
+          }else if (person === "Larry Long"){
+    
+            const newSalesForm = [person, time, items, totalProfits, 0];
+            const copyForms = this.state.forms.concat([newSalesForm]);
+            this.setState({forms: copyForms});
+    
+          }          
         },
       }}>
         <Router>

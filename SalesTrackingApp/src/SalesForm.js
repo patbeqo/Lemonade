@@ -22,8 +22,8 @@ class SalesForm extends Component {
     totalProfitsBool: 0,    //Decides whether or not to highlight in red
     
     popBool: 0,             //Decides whether or not to enable popup for 5 seconds
-    salesReportData: [],     //Stores data that will be needed for the Sales Report
-    commission: 0
+    salesReportData: []     //Stores data that will be needed for the Sales Report
+
   };
 
 
@@ -85,7 +85,7 @@ class SalesForm extends Component {
       //this.setState({sales: [...this.state.sales, <SalesItem onDelete={this.handleDelete} id = {index} drink = {currDrink} amountSold = {currAmountSold} profits = {currProfits}/>]});
       this.setState({sales: [...this.state.sales,
           {onDelete: this.handleDelete,
-           drink: currDrink ,
+           drink: currDrink,
            amountSold: currAmountSold,
            profits: currProfits }
           ]});
@@ -165,7 +165,7 @@ class SalesForm extends Component {
   };
 
 
-  //Function saves SalesForm data if valid
+  //Function resets page if data is valid
   saveDataFunction(){
 
     //Handles Errors
@@ -192,33 +192,7 @@ class SalesForm extends Component {
     }
 
 
-    //If there are no issues continue with saving the data
     if(tmp === 0){
-
-
-      //Calculate Commission
-      if(this.state.salesPerson === "Jeff Terry"){
-
-        const newCommission = this.state.totalProfits * 0.1;
-        this.setState({commission: newCommission});
-
-
-      }else if (this.state.salesPerson === "Thomas Black"){
-
-        const newCommission = this.state.totalProfits * 0.2;
-        this.setState({commission: newCommission});
-
-      }else if (this.state.salesPerson === "John Rice"){
-
-        const newCommission = this.state.totalProfits * 0.05;
-        this.setState({commission: newCommission});
-
-      }else if (this.state.salesPerson === "Larry Long"){
-
-        this.setState({commission: 0});
-
-      }
-      
 
       //Reset initial values and enable success popup
       
@@ -332,13 +306,14 @@ class SalesForm extends Component {
                   <div class="col-sm">
                     <button type="button" class="btn btn-info" onClick = {()=>{
                       
-                      this.saveDataFunction();
-
+                     //If there are no issues continue with saving the data
                       if(this.state.totalProfits !== 0 && this.state.salesPerson !== "None" && this.state.dateTime !== ""){
 
-                        data.saveData(this.state.salesPerson, this.state.totalProfits, this.state.dateTime, this.state.commission, this.state.items)
+                        data.saveData(this.state.salesPerson, this.state.totalProfits, this.state.dateTime, this.state.items)
 
                       }
+
+                      this.saveDataFunction();
 
                       }}>Save</button>
                   </div>

@@ -9,8 +9,17 @@ class ProfitsRow extends Component {
                 <div class="container">
                     <div class="row">
                         <div class="col">{this.props.date}</div>
-                        <div class="col">{this.props.items}</div>
-                        <div class="col">${this.props.profits}</div>
+                        <div class="col">
+                            <ul>
+                                {this.props.items.map((item) =>{
+                                    return(
+                                        <li>{item}</li>
+                                    )
+                                })
+                                }
+                            </ul>
+                        </div>
+                        <div class="col">${this.props.money}</div>
                         <div class="col">${this.props.commission}</div>
                     </div>
                 </div>
