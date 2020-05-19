@@ -16,22 +16,21 @@ class ReportPage extends Component {
     endBool: 0,
     startBool: 0,
     showBool: 0,
-    profits:[]
+    profits:[],
+    totalsCommission: 0,
+    totalsProfit: 0
 
   };
 
 
   addProfit = (inDate, inItems, inProfit, inCommission) => {
 
+    console.log("hwwasdf")
+
     this.setState({profits: [...this.state.profits, <ProfitsRow date = {inDate} items = {inItems} profits = {inProfit}  commission = {inCommission} />]});
   
   };
 
-  sortFunction(){
-        
-    //Will repeadetly call addProfit function
-
-  }
 
 
   //Function updates the Sales Person
@@ -73,34 +72,85 @@ class ReportPage extends Component {
   };
 
 
-  generateReport() {
+  sortDataFunction = (dataToSort) =>{
 
-    if(this.state.salesPerson === "None" || this.state.startTime === "" || this.state.endTime === ""){
+    var i;
+    const maxloop = dataToSort[1].length;
+    var newItems = []
 
-      this.setState({showBool: 0});
+    for(i=0; i<maxloop; i++){
 
-      if(this.state.salesPerson === "None"){
+      if(!newItems.includes(dataToSort[2][i])){
 
-        this.setState({personBool: 1})
+        newItems.push([dataToSort[2][i]]);
+        newItems.push("  ");
 
       }
 
-      if(this.state.startTime === ""){
+    }
 
-        this.setState({startBool: 1})
-        
-      }
 
-      if(this.state.endTime === ""){
+    this.addProfit(dataToSort[1],newItems,dataToSort[3],dataToSort[4])
 
-        this.setState({endBool: 1})
-        
+    const copyTotalsProfit = this.state.totalsProfit;
+    const newTotalsProfit = copyTotalsProfit + dataToSort[3];
+    this.setState({totalsProfit: newTotalsProfit});
+
+    const copyTotalsCommission = this.state.totalsCommission;
+    const newTotalsCommission = copyTotalsCommission + dataToSort[4];
+    this.setState({totalsCommission: newTotalsCommission});
+
+  };
+
+
+  generateReport = (salesForms) => {
+
+    var tmp = 0;
+
+    this.setState({profits: []});
+    
+
+    if(this.state.salesPerson === "None"){
+
+      this.setState({personBool: 1});
+      tmp++;
+
+    }
+
+    if(this.state.startTime === ""){
+
+      this.setState({startBool: 1});
+      tmp++;
+      
+    }
+
+    if(this.state.endTime === ""){
+
+      this.setState({endBool: 1});
+      tmp++;
+      
+    }
+
+    if(tmp === 0){
+
+      this.setState({showBool: 1});
+
+      var i = 0;
+      const maxloop = salesForms.length;
+
+      for ( i = 0; i < maxloop; i++){
+
+        if(salesForms[i][0] === this.state.salesPerson){
+
+          this.sortDataFunction(salesForms[i]);
+
+        }
+
       }
 
     }else{
 
-      this.setState({showBool: 1});
-
+      this.setState({showBool: 0});
     }
 
   };
@@ -128,7 +178,6 @@ class ReportPage extends Component {
                       </select>
                     </div>
                   </div>
-                  <p1>{data.state.forms}</p1>
                   <div class="form-group row">
                     <div class="col">
                       <label>Start Date</label>
@@ -141,7 +190,7 @@ class ReportPage extends Component {
                       <input class="form-control" type="datetime-local" onChange={this.updateEndDate.bind(this)} id={this.state.endBool ? "errorClass":""} value= {this.state.endTime}></input>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-info" onClick={this.generateReport.bind(this)}>Generate Report</button>
+                  <button type="button" class="btn btn-info" onClick={() => this.generateReport(data.state.forms)}>Generate Report</button>
               </form>
               <div class={ this.state.showBool  ? "" :"hide-report"}>
                   <div class="container">
@@ -164,8 +213,8 @@ class ReportPage extends Component {
                       <div class="row">
                           <div class="col">Totals</div>
                           <div class="col"></div>
-                          <div class="col">$dollars</div>
-                          <div class="col">$a dolla</div>
+                          <div class="col">${this.state.totalsProfit}</div>
+                          <div class="col">${this.state.totalsCommission}</div>
                       </div>
                   </div>
                   <hr></hr>

@@ -29,7 +29,7 @@ class App extends Component {
         },
         saveData: (person, totalProfits, time, commision, items) =>{
           const newSalesForm = [person, time, items, totalProfits, commision];
-          const copyForms = this.state.forms.concat(newSalesForm);
+          const copyForms = this.state.forms.concat([newSalesForm]);
           this.setState({forms: copyForms});
         },
       }}>

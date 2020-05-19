@@ -228,6 +228,7 @@ class SalesForm extends Component {
       this.setState({numSold: 0});
       this.setState({totalProfits: 0});
       this.setState({sales: []});
+      this.setState({items: []});
       this.setState({drinkSelectedBool: 0});
       this.setState({numSoldBool: 0});
       this.setState({salesPersonBool: 0});
