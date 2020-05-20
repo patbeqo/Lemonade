@@ -1,15 +1,37 @@
-.Report-Title {
+.back-button {
 
-    margin: auto;
+	padding-top: 1em;
+	padding-left: 1em;
+
 }
+
+
+
+.container {
+
+	padding-top: 1em;
+
+}
+
 
 #errorClass {
-	-webkit-box-shadow: inset 0px 0px 29px 11px rgba(250,13,25,0.48);
-	-moz-box-shadow: inset 0px 0px 29px 11px rgba(250,13,25,0.48);
-	box-shadow: inset 0px 0px 29px 11px rgba(250,13,25,0.48);
+	
+	border: 2px solid red;
 }
+
 
 .hide-report {
 
 	display: none;
 }
+
+
+
+.Report-Title {
+
+    margin: auto;
+}
+
+
+
+

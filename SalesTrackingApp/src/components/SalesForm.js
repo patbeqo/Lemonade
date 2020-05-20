@@ -54,6 +54,7 @@ class SalesForm extends Component {
     //If the number of items is a valid poistive integer, and there is an item selected, Add salesForm
     if(tmp === 0){
 
+      //Storing current state values
       const currDrink = this.state.drinkSelected;
       const currAmountSold = this.state.numSold;
       var currProfits = 0;
@@ -83,7 +84,6 @@ class SalesForm extends Component {
       this.setState({totalProfits: newTotalProfits});
 
       //Adding a new component in order to be displayed, including the index in order to identify which element to delete in the future
-      //this.setState({sales: [...this.state.sales, <SalesItem onDelete={this.handleDelete} id = {index} drink = {currDrink} amountSold = {currAmountSold} profits = {currProfits}/>]});
       this.setState({sales: [...this.state.sales,
           {onDelete: this.handleDelete,
            drink: currDrink,
@@ -218,7 +218,7 @@ class SalesForm extends Component {
             this.setState({popBool: 0});
         }
         .bind(this),
-        5000
+        5000  // 5 seconds
       );
 
 
@@ -231,9 +231,11 @@ class SalesForm extends Component {
     
     return (
         <div>
-          <Link to = "/">
-            <button type="button" class="btn btn-danger">Back</button>
-          </Link>
+          <div className = "back-button">
+            <Link to = "/">
+              <button type="button" class="btn btn-danger">Back</button>
+            </Link>
+          </div>
           <appContext.Consumer>
             {(data) => (
               <div className="Site">
@@ -246,7 +248,7 @@ class SalesForm extends Component {
                     <div className="form-group row">
                       <div className="col">
                         <label>Sales Person</label>
-                        <select className="form-control" id={this.state.salesPersonBool ? "errorclassName":"item_select"} onChange = {this.updateSalesPerson.bind(this)} value = {this.state.salesPerson} >
+                        <select class="form-control" id={this.state.salesPersonBool ? "errorClass":"item_select"} onChange = {this.updateSalesPerson.bind(this)} value = {this.state.salesPerson} >
                             <option>None</option>
                             <option>Jeff Terry</option>
                             <option>Thomas Black</option>
@@ -258,7 +260,7 @@ class SalesForm extends Component {
                     <div className="form-group row">
                       <div className="col">
                         <label>Date and time</label>
-                        <input className="form-control" type="datetime-local" onChange={this.updateDateTime.bind(this)} id={this.state.dateTimeBool ? "errorclassName":""} value= {this.state.dateTime}></input>
+                        <input className="form-control" type="datetime-local" onChange={this.updateDateTime.bind(this)} id={this.state.dateTimeBool ? "errorClass":""} value= {this.state.dateTime}></input>
                       </div>
                     </div>
                   </form>
@@ -266,7 +268,7 @@ class SalesForm extends Component {
                   <div className="form-group row">
                       <div className="col">
                         <label>Drink</label>
-                        <select className="form-control" onChange={this.updateDrinkSelected.bind(this)} id={this.state.drinkSelectedBool ? "errorclassName" : "item_select"}  value={this.state.drinkSelected} >
+                        <select className="form-control" onChange={this.updateDrinkSelected.bind(this)} id={this.state.drinkSelectedBool ? "errorClass" : "item_select"}  value={this.state.drinkSelected} >
                           <option>None</option>
                           <option>Fresh Lemon Lemonade</option>
                           <option>Orange & Lemon Splash</option>
@@ -276,10 +278,12 @@ class SalesForm extends Component {
                       </div>
                       <div className="col">
                         <label>Number of Units Sold</label>
-                        <input className="form-control" onChange={this.updateNumSold.bind(this)} id={this.state.numSoldBool ? "errorclassName" : "item_select"} value={this.state.numSold}></input>
+                        <input className="form-control" onChange={this.updateNumSold.bind(this)} id={this.state.numSoldBool ? "errorClass" : "item_select"} value={this.state.numSold}></input>
                       </div>
                       <div className="col">
-                        <button type="button" className="btn btn-outline-success" onClick = {this.addSale.bind(this)}>Enter Item</button>
+                        <div className="enter">
+                          <button type="button" className="btn btn-outline-success" onClick = {this.addSale.bind(this)}>Enter Item</button>
+                        </div>
                       </div>
                   </div>
                   <div className="container" id={this.state.sales.length ? "" : "hide"}>
@@ -301,14 +305,14 @@ class SalesForm extends Component {
               <footer className = "total-save"> 
                 <div className="container">
                   <div className="row">
-                    <div className="col-sm">
+                    <div className="column">
                       <label>Total</label>
-                      <p>
-                      <text type="text"  id = {this.state.totalProfitsBool? "errorclassName":"item_select"} >${this.state.totalProfits}</text>
-                      </p>
+                      <div>
+                        <text type="text"  id = {this.state.totalProfitsBool? "errorClass":"item_select"} >${this.state.totalProfits}</text>
+                      </div>
                     </div>
-                    <div className="col-sm">
-                      <button type="button" className="btn btn-info" onClick = {()=>{
+                    <div className="column"  id="totals">
+                      <button type="button"className="btn btn-info" onClick = {()=>{
                         
                       //If there are no issues continue with saving the data
                         if(this.state.totalProfits !== 0 && this.state.salesPerson !== "None" && this.state.dateTime !== ""){

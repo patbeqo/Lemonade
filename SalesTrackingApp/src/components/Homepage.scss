@@ -1,8 +1,27 @@
+.back-button {
+
+	padding-top: 1em;
+	padding-left: 1em;
+
+}
+
+.column {
+
+	flex: 50%;
+	text-align: center;
+
+}
+
+
+.row {
+
+	display: flex;
+
+}
+
+
 .Welcome {
 	text-align: center;
 	padding-top: 300px;
-}
-.buttons {
-	text-align: center;
-	margin: auto;
+	
 }

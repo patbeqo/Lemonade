@@ -187,9 +187,11 @@ class ReportPage extends Component {
     
     return (
       <div>
-        <Link to = "/">
-          <button type="button" class="btn btn-danger">Back</button>
-        </Link>
+        <div className = "back-button">
+          <Link to = "/">
+            <button type="button" class="btn btn-danger">Back</button>
+          </Link>
+        </div>
         <appContext.Consumer>
           {(data) => (
             <div className="Site">
@@ -199,7 +201,7 @@ class ReportPage extends Component {
                   <div className="form-group row">
                     <div className="col">
                       <label for="item_selct">Sales Person</label>
-                      <select className="form-control" id={this.state.personBool ? "errorclassName":"item_select"} onChange = {this.updateSalesPerson.bind(this)}>
+                      <select className="form-control" id={this.state.personBool ? "errorClass":"item_select"} onChange = {this.updateSalesPerson.bind(this)}>
                         <option>None</option>
                         <option>Jeff Terry</option>
                         <option>Thomas Black</option>
@@ -211,13 +213,13 @@ class ReportPage extends Component {
                   <div className="form-group row">
                     <div className="col">
                       <label>Start Date</label>
-                      <input className="form-control" type="datetime-local" onChange={this.updateStartDate.bind(this)} id={this.state.startBool ? "errorclassName":""} value= {this.state.startTime}></input>
+                      <input className="form-control" type="datetime-local" onChange={this.updateStartDate.bind(this)} id={this.state.startBool ? "errorClass":""} value= {this.state.startTime}></input>
                     </div>
                   </div>
                   <div className="form-group row">
                     <div className="col">
                       <label>End Date</label>
-                      <input className="form-control" type="datetime-local" onChange={this.updateEndDate.bind(this)} id={this.state.endBool ? "errorclassName":""} value= {this.state.endTime}></input>
+                      <input className="form-control" type="datetime-local" onChange={this.updateEndDate.bind(this)} id={this.state.endBool ? "errorClass":""} value= {this.state.endTime}></input>
                     </div>
                   </div>
                   <button type="button" className="btn btn-info" onClick={() => {this.generateReport(data.state.forms)}}>Generate Report</button>
