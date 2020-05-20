@@ -142,7 +142,7 @@ class ReportPage extends Component {
               var ampm = d3.getHours() >= 12 ? "pm" : "am";
               var hour = d3.getHours() % 12;
               hour = hour >= 10 ? hour : "0" +  hour;
-              var minute = d3.getHours() >= 10 ? minute : "0" + d3.getHours();
+              var minute = d3.getMinutes() >= 10 ? d3.getMinutes() : "0" + d3.getMinutes();
 
               var newTime = months[d3.getMonth()] + " " + d3.getDate() + ", " + d3.getFullYear() + " " + hour + ":" + minute + ampm ;
 
