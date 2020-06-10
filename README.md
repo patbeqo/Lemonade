@@ -10,3 +10,5 @@ In order to run locally:
 2. type the command 
    { npm start }
 3. Should automatically open webpage with project
+
+Implemented using React
